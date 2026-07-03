@@ -42,7 +42,7 @@ const category_config: CategoryConfigItem[] = [
       "Master SEO, PPC, social media, email marketing, content strategy and AI-powered marketing tools. Graduate with an industry-recognised certification, real-world project experience and 100% placement assistance.",
     targetCategory: "Marketing",
     seo: {
-      title: "Advanced Digital Marketing Course in Mumbai | Adshalaa",
+      title: "Advanced & AI-Powered Digital Marketing Certification Course in Andheri Mumbai | Adshalaa",
       description:
         "Join Adshalaa's Certification in Advanced Digital Marketing & AI — a 3-month offline program in Andheri, Mumbai, followed by a 1-month paid internship. 100% placement assistance. Enroll today.",
       keywords:
@@ -60,7 +60,7 @@ const category_config: CategoryConfigItem[] = [
       "Learn professional graphic design using Adobe Photoshop, Illustrator, InDesign and AI-powered design workflows. Build a job-ready portfolio, earn a recognised certification and launch your creative career.",
     targetCategory: "Design",
     seo: {
-      title: "Graphic Design Course in Mumbai | Adshalaa",
+      title: "AI-Powered & Advanced Graphic Design Certification Course in Andheri Mumbai | Adshalaa",
       description:
         "Master graphic design with AI at Adshalaa, Andheri Mumbai. Professional certification, real portfolio projects, 1-month paid internship and 100% placement support.",
       keywords:
@@ -78,7 +78,7 @@ const category_config: CategoryConfigItem[] = [
       "Build modern, responsive websites using HTML, CSS, JavaScript, WordPress and Shopify. Graduate with live project experience, an industry certification and full placement support.",
     targetCategory: "Development",
     seo: {
-      title: "Web Development Course in Mumbai | Adshalaa",
+      title: "Web Development Certification Course in Andheri Mumbai | Adshalaa",
       description:
         "Learn web development at Adshalaa, Andheri Mumbai. Build real websites, earn certification and get placed. 3-month program + 1-month paid internship.",
       keywords:
@@ -96,7 +96,7 @@ const category_config: CategoryConfigItem[] = [
       "Learn to plan, create and grow brand presence across Instagram, Facebook, LinkedIn and YouTube. Master content calendars, analytics, paid ads and influencer strategy with expert mentors.",
     targetCategory: "Marketing",
     seo: {
-      title: "Social Media Management Course in Mumbai | Adshalaa",
+      title: "Social Media Management Certification Course in Andheri Mumbai | Adshalaa",
       description:
         "Master social media marketing at Adshalaa, Mumbai. Learn content strategy, paid ads and brand management. Get certified and placed with 100% placement assistance.",
       keywords:
@@ -114,7 +114,7 @@ const category_config: CategoryConfigItem[] = [
       "Become a certified marketplace specialist. Learn to sell on Amazon, Flipkart and Meesho — from product listings and catalogue management to sponsored ads and scaling strategies.",
     targetCategory: "Marketing",
     seo: {
-      title: "Marketplace Certification Course in Mumbai | Adshalaa",
+      title: "Marketplace Certification Course in Andheri Mumbai | Adshalaa",
       description:
         "Get certified in marketplace selling (Amazon, Flipkart, Meesho) at Adshalaa Mumbai. Learn product listing, ads and scaling. 100% placement support.",
       keywords:
@@ -132,7 +132,7 @@ const category_config: CategoryConfigItem[] = [
       "Master technical SEO, on-page and off-page optimisation, keyword research, link building and AI-powered SEO tools. Learn to rank websites and drive consistent organic traffic professionally.",
     targetCategory: "Marketing",
     seo: {
-      title: "SEO Course in Mumbai | Advanced SEO Certification | Adshalaa",
+      title: "Advanced SEO Certification Course in Andheri Mumbai | Adshalaa",
       description:
         "Learn advanced SEO at Adshalaa, Andheri Mumbai. Technical SEO, keyword research, link building and AI tools. Get certified and placed. Enroll now.",
       keywords:
