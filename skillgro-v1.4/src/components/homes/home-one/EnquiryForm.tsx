@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import "./EnquiryForm.css";
 import BtnArrow from "@/svg/BtnArrow"
 // Define the shape of our form state
@@ -15,7 +16,6 @@ interface FormData {
 
 // Available program list options
 const PROGRAMS = [
-  'Web Development',
   'Certification in Advanced Digital Marketing & AI',
   'Certification in Advanced Graphic Design & AI',
   'Mastery in Social Media Management',
@@ -41,14 +41,7 @@ export default function EnquiryForm() {
 }
 
 export function EnquiryFormContainer() {
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    phone: '',
-    email: '',
-    city: '',
-    program: '',
-    message: '',
-  });
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({ mode: "onChange" });
   const [agreed, setAgreed] = useState(false);
   const [status, setStatus] = useState<{
     loading: boolean;
@@ -60,21 +53,14 @@ export function EnquiryFormContainer() {
     message: '',
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit = async (data: FormData) => {
     setStatus({ loading: true, success: null, message: '' });
-    console.log(formData)
 
     try {
       const response = await fetch('/api/enquire', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
       });
 
       const result = await response.json();
@@ -85,10 +71,8 @@ export function EnquiryFormContainer() {
           success: true,
           message: 'Your enquiry has been submitted successfully!',
         });
-        // Reset form on success
-        setFormData({ name: '', phone: '', email: '', city: '', program: '', message: '' });
+        reset();
       } else {
-        // If the server returned a 207 (Partial Success) or an error status
         setStatus({
           loading: false,
           success: false,
@@ -107,33 +91,67 @@ export function EnquiryFormContainer() {
   return (
     <div className="form-container" id='enquiry-form01'>
       <h2 className="form-title">Enquiry Form</h2>
-      <form onSubmit={handleSubmit} className="enquiry-form">
+      <form onSubmit={handleSubmit(onSubmit)} className="enquiry-form">
 
         <div className="form-group">
           <label htmlFor="name">Full Name *</label>
           <input
             type="text"
             id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
             placeholder="Enter Your Name"
+            {...register('name', {
+              required: 'Name is required',
+              validate: (value) => {
+                if (!value) return undefined;
+                if (value.trim().length < 2) return 'Name must be at least 2 characters';
+                if (!/^[a-zA-Z\s]+$/.test(value)) return 'Name should contain only alphabets';
+                return undefined;
+              }
+            })}
           />
+          {errors.name && <p className="text-danger mt-1 mb-0" style={{ fontSize: "12px" }}>{errors.name.message}</p>}
         </div>
 
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="phone">Phone Number *</label>
             <input
-              type="tel"
+              type="text"
               id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
               placeholder="Enter Your Phone No."
+              inputMode="numeric"
+              maxLength={10}
+              onInput={(e) => {
+                e.currentTarget.value = e.currentTarget.value.replace(/\D/g, "");
+              }}
+              {...register("phone", {
+                required: "Phone number is required",
+                validate: (value) => {
+                  if (!value) {
+                    return "Phone number is required";
+                  }
+
+                  if (!/^\d+$/.test(value)) {
+                    return "Phone number must contain only digits";
+                  }
+
+                  if (value.length < 10) {
+                    return "Phone number must be 10 digits";
+                  }
+
+                  if (value.length > 10) {
+                    return "Phone number cannot exceed 10 digits";
+                  }
+
+                  if (!/^[6-9]/.test(value)) {
+                    return "Phone number must start with 6, 7, 8, or 9";
+                  }
+
+                  return true;
+                },
+              })}
             />
+            {errors.phone && <p className="text-danger mt-1 mb-0" style={{ fontSize: "12px" }}>{errors.phone.message}</p>}
           </div>
 
           <div className="form-group">
@@ -141,12 +159,17 @@ export function EnquiryFormContainer() {
             <input
               type="email"
               id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
               placeholder="Enter Your Email"
+              {...register('email', {
+                required: 'Email is required',
+                validate: (value) => {
+                  if (!value) return undefined;
+                  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) return 'Invalid email address';
+                  return undefined;
+                }
+              })}
             />
+            {errors.email && <p className="text-danger mt-1 mb-0" style={{ fontSize: "12px" }}>{errors.email.message}</p>}
           </div>
         </div>
 
@@ -156,30 +179,25 @@ export function EnquiryFormContainer() {
             <input
               type="text"
               id="city"
-              name="city"
-              // className='form-control'
-              value={formData.city}
-              onChange={handleChange}
-              required
               placeholder="Enter City"
+              {...register('city', { required: 'City is required' })}
             />
+            {errors.city && <p className="text-danger mt-1 mb-0" style={{ fontSize: "12px" }}>{errors.city.message}</p>}
           </div>
 
           <div className="form-group">
             <label htmlFor="program">Interested Program *</label>
             <select
               id="program"
-              name="program"
-              value={formData.program}
-              onChange={handleChange}
-              required
               style={{ padding: "9.1px" }}
+              {...register('program', { required: 'Please select a program' })}
             >
-              <option value="" disabled>Select a program</option>
+              <option value="" disabled selected>Select a program</option>
               {PROGRAMS.map((prog) => (
                 <option key={prog} value={prog}>{prog}</option>
               ))}
             </select>
+            {errors.program && <p className="text-danger mt-1 mb-0" style={{ fontSize: "12px" }}>{errors.program.message}</p>}
           </div>
         </div>
 
@@ -187,13 +205,11 @@ export function EnquiryFormContainer() {
           <label htmlFor="message">Message *</label>
           <textarea
             id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
             rows={2}
             placeholder="Tell us more about your requirements..."
+            {...register('message', { required: 'Message is required' })}
           />
+          {errors.message && <p className="text-danger mt-1 mb-0" style={{ fontSize: "12px" }}>{errors.message.message}</p>}
         </div>
         <div className="consent-group">
           <label className="consent-label">
