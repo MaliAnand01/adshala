@@ -1,29 +1,33 @@
-// src/components/common/BrochurePopup.tsx
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useForm } from "react-hook-form"
 import BtnArrow from "@/svg/BtnArrow"
+
+type FormData = {
+  username: string;
+  userphone: string;
+  useremail: string;
+}
 
 interface BrochurePopupProps {
   isOpen: boolean
   onClose: () => void
 }
 
-const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
-  const [username, setUsername] = useState("")
-  const [useremail, setUseremail] = useState("")
-  const [userphone, setUserphone] = useState("")
+const BrochurePopupInner = ({ onClose }: { onClose: () => void }) => {
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({
+    mode: "onChange",
+    defaultValues: { username: '', userphone: '', useremail: '' }
+  })
   const [submitted, setSubmitted] = useState(false)
 
-  if (!isOpen) return null
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Brochure Data", username, useremail, userphone)
+  const onSubmit = async (data: FormData) => {
+    console.log("Brochure Data", data)
     try {
       const response = await fetch('/api/brochure', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, userphone, useremail }),
+        body: JSON.stringify(data),
       })
       if (!response.ok) {
         console.log("brochure data saved")
@@ -42,7 +46,7 @@ const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
   const handleClose = () => {
     onClose()
     // reset after close animation
-    setTimeout(() => { setUsername(""); setUseremail(""); setUserphone(""); setSubmitted(false) }, 300)
+    setTimeout(() => { reset(); setSubmitted(false) }, 300)
   }
 
   return (
@@ -100,36 +104,62 @@ const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
               Get detailed course info, fees &amp; placement stats — free.
             </p>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="form-grp" style={{ marginBottom: "16px" }}>
                 <input
                   type="text"
                   placeholder="Your Full Name *"
-                  value={username}
-                  onChange={e => setUsername(e.target.value)}
-                  required
+                  {...register('username', {
+                    required: 'Name is required',
+                    validate: (value) => {
+                      if (!value) return undefined;
+                      if (value.trim().length < 2) return 'Name must be at least 2 characters';
+                      if (!/^[a-zA-Z\s]+$/.test(value)) return 'Name should contain only alphabets';
+                      return undefined;
+                    }
+                  })}
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(/[^a-zA-Z\s]/g, '');
+                  }}
                   style={{ width: "100%", padding: "7px", borderRadius: "16px", border: "0.5px solid black" }}
                 />
+                {errors.username && <p className="text-danger mt-1 mb-0" style={{ fontSize: "12px", textAlign: "left" }}>{errors.username.message}</p>}
               </div>
               <div className="form-grp" style={{ marginBottom: "16px" }}>
                 <input
                   type="tel"
                   placeholder="Your Phone Number *"
-                  value={userphone}
-                  onChange={e => setUserphone(e.target.value)}
-                  required
+                  maxLength={10}
+                  {...register('userphone', {
+                    required: 'Phone is required',
+                    validate: (value) => {
+                      if (!value) return undefined;
+                      if (!/^[0-9]{10}$/.test(value)) return 'Phone number must be exactly 10 digits';
+                      return undefined;
+                    }
+                  })}
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, '');
+                  }}
                   style={{ width: "100%", padding: "7px", borderRadius: "16px", border: "0.5px solid black" }}
                 />
+                {errors.userphone && <p className="text-danger mt-1 mb-0" style={{ fontSize: "12px", textAlign: "left" }}>{errors.userphone.message}</p>}
               </div>
               <div className="form-grp" style={{ marginBottom: "24px" }}>
                 <input
                   type="email"
                   placeholder="Your Email Address *"
-                  value={useremail}
-                  onChange={e => setUseremail(e.target.value)}
-                  required
+                  {...register('useremail', {
+                    required: 'Email is required',
+                    validate: (value) => {
+                      if (!value) return undefined;
+                      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) return 'Invalid email address';
+                      return undefined;
+                    }
+                  })}
                   style={{ width: "100%", padding: "7px", borderRadius: "16px", border: "0.5px solid black" }}
                 />
+                {errors.useremail && <p className="text-danger mt-1 mb-0" style={{ fontSize: "12px", textAlign: "left" }}>{errors.useremail.message}</p>}
               </div>
               <button
                 type="submit"
@@ -144,6 +174,11 @@ const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
       </div>
     </>
   )
+}
+
+const BrochurePopup = ({ isOpen, onClose }: BrochurePopupProps) => {
+  if (!isOpen) return null;
+  return <BrochurePopupInner onClose={onClose} />;
 }
 
 export default BrochurePopup
