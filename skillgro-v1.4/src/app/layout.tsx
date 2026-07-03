@@ -2,6 +2,7 @@
 import "../styles/index.scss"
 import { Provider } from "react-redux";
 import store from "@/redux/store";
+import Script from "next/script";
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -19,6 +20,19 @@ export default function RootLayout({
         <title>Best Digital Marketing Course with Certification | Adshalaa</title>
       </head>
       <body suppressHydrationWarning={true}>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-MKP87EQCYY"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-MKP87EQCYY');
+          `}
+        </Script>
         <Provider store={store}>
           {children}
         </Provider>
