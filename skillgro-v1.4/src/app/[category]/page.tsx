@@ -20,6 +20,7 @@ import ScrollToTopOnMount from "./ScrollToTopOnMount";
 
 import category_config from "@/data/home-data/CategoryConfig";
 import courses_data from "@/data/inner-data/InnerCourseData";
+import EnquiryHero from "@/components/courses/course-enquiry/EnquiryHero";
 
 // ─────────────────────────────────────────────────────────────────────
 // 1. Tell Next.js which slugs to pre-render at build time
@@ -39,6 +40,26 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params;
+
+  // Handle course enquiry routes
+  if (category.endsWith("-enquiry-now")) {
+    const courseSku = category.replace(/-enquiry-now$/, "");
+    const course = courses_data.find((c) => c.sku === courseSku);
+    if (course) {
+      return {
+        title: `${course.title} Enquiry Now | Adshalaa`,
+        description: `Enquire now for ${course.title} at Adshalaa. Get detailed information regarding batches, syllabus, pricing, mode, and placement support.`,
+        openGraph: {
+          title: `${course.title} Enquiry Now | Adshalaa`,
+          description: `Enquire now for ${course.title} at Adshalaa.`,
+          url: `https://adshalaa.com/${category}`,
+          siteName: "Adshalaa",
+          type: "website",
+        },
+      };
+    }
+  }
+
   const cat = category_config.find((c) => c.slug === category);
 
   if (!cat) {
@@ -64,6 +85,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 // ─────────────────────────────────────────────────────────────────────
 export default async function CategoryPage({ params }: Props) {
   const { category } = await params;
+
+  // Handle course enquiry routes
+  if (category.endsWith("-enquiry-now")) {
+    const courseSku = category.replace(/-enquiry-now$/, "");
+    const course = courses_data.find((c) => c.sku === courseSku);
+    if (!course) {
+      notFound();
+    }
+
+    return (
+      <Wrapper>
+        <ScrollToTopOnMount />
+        <HeaderOne />
+        <main className="main-area fix" style={{ backgroundColor: "#ffffff" }}>
+          <EnquiryHero course={course} />
+        </main>
+        <FooterOne />
+      </Wrapper>
+    );
+  }
 
   // Find matching category config entry
   const cat = category_config.find((c) => c.slug === category);

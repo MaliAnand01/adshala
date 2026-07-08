@@ -40,8 +40,13 @@ export default function EnquiryForm() {
   );
 }
 
-export function EnquiryFormContainer() {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({ mode: "onChange" });
+export function EnquiryFormContainer({ defaultProgram }: { defaultProgram?: string }) {
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>({ 
+    mode: "onChange",
+    defaultValues: {
+      program: defaultProgram || ""
+    }
+  });
   const [agreed, setAgreed] = useState(false);
   const [status, setStatus] = useState<{
     loading: boolean;

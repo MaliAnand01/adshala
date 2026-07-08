@@ -87,11 +87,11 @@ const CourseArea = () => {
                                           </li>
                                           {/* <li className="avg-rating"><i className="fas fa-star"></i> ({item.rating} Reviews)</li> */}
                                        </ul>
-                                       <h5 className="title"><Link href={`/course-details/${item.id}`}>{item.title}</Link></h5>
+                                       <h5 className="title"><Link href={`/course-details/${item?.sku}`}>{item.title}</Link></h5>
                                        {/* <p className="author">By <Link href="#">{item.instructors}</Link></p> */}
                                        <div className="courses__item-bottom">
                                           <div className="button">
-                                             <Link href={`/course-details/${item.id}`}>
+                                             <Link href={`/course-details/${item?.sku}`}>
                                                 <span className="text">Enroll Now</span>
                                                 <i className="flaticon-arrow-right"></i>
                                              </Link>
