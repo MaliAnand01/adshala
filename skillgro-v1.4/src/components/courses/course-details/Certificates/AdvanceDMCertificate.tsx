@@ -1,26 +1,17 @@
 import React from "react";
 import Image from "next/image";
+import { CourseDataType } from "@/data/inner-data/InnerCourseData";
 
-import img1 from "@/assets/img/certificates/advance-digital-marketing/AshalaaDigital1.png";
-import img2 from "@/assets/img/certificates/advance-digital-marketing/AshalaaDigital2.png";
+const AdvanceDMCertificate = ({ single_course }: { single_course?: CourseDataType }) => {
+  const certificates = single_course?.certificateImages;
 
-const certificates = [
-  {
-    title: "Certificate of Completion",
-    image: img1,
-  },
-  {
-    title: "Internship Certificate",
-    image: img2,
-  },
-];
+  if (!certificates || certificates.length === 0) {
+    return null; // Or return a placeholder if desired
+  }
 
-const AdvanceDMCertificate = () => {
   return (
     <section className="py-5">
       <div className="container">
-       
-
         <div className="row g-4">
           {certificates.map((certificate, index) => (
             <div className="col-12 col-md-6" key={index}>

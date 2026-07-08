@@ -2,36 +2,43 @@
 import VideoPopup from "@/modals/VideoPopup"
 import EnquiryPopup from "@/modals/EnquiryPopup"
 import Image from "next/image"
-import Link from "next/link"
 import { useState } from "react";
 import InjectableSvg from "@/hooks/InjectableSvg";
 import BtnArrow from "@/svg/BtnArrow";
 import { useRouter } from "next/navigation";
-import img_1 from "@/assets/img/courses/course_thumb02.jpg"
-import img_2 from "@/assets/img/others/payment.png"
 import icon_1 from "@/assets/img/icons/course_icon01.svg";
 import icon_2 from "@/assets/img/icons/course_icon02.svg";
 import icon_3 from "@/assets/img/icons/course_icon03.svg";
 import icon_4 from "@/assets/img/icons/course_icon04.svg";
 import icon_5 from "@/assets/img/icons/course_icon05.svg";
 import icon_6 from "@/assets/img/icons/course_icon06.svg";
-import sidebarimage from "@/assets/img/courses/sidebar_image/ADSHALA BANNER 02.jpg";
+import { CourseDataType } from "@/data/inner-data/InnerCourseData";
 
-const AdvanceDMSidebar = () => {
+const AdvanceGDSidebar = ({ single_course }: { single_course?: CourseDataType }) => {
    const router = useRouter();
    const [isVideoOpen, setIsVideoOpen] = useState(false);
    const [isEnquiryOpen, setIsEnquiryOpen] = useState(false)
+   
+   if (!single_course) return null;
+
    return (
       <>
          <div className="col-xl-3 col-lg-4">
             <div className="courses__details-sidebar">
                <div className="courses__details-video">
-                  <Image src={sidebarimage} alt="img" style={{ objectFit: "contain" }} />
+                  {single_course.sidebarImage && (
+                     <Image src={single_course.sidebarImage} alt="img" style={{ objectFit: "contain" }} />
+                  )}
                   <a onClick={() => setIsVideoOpen(true)} style={{ cursor: "pointer" }} className="popup-video"><i className="fas fa-play"></i></a>
                </div>
                <div className="courses__cost-wrap">
                   <span>This Course Fee:</span>
-                  <h2 className="title">₹90,000 <del style={{ color: "#ffc224" }}>₹1,00,000</del></h2>
+                  <h2 className="title">
+                     ₹{single_course.price?.toLocaleString()} 
+                     {single_course.originalPrice && (
+                        <del style={{ color: "#ffc224" }}> ₹{single_course.originalPrice.toLocaleString()}</del>
+                     )}
+                  </h2>
                </div>
                <div className="courses__information-wrap">
                   <h5 className="title">Course includes:</h5>
@@ -39,32 +46,32 @@ const AdvanceDMSidebar = () => {
                      <li>
                         <InjectableSvg src={icon_1.src} alt="img" className="injectable" />
                         Level
-                        <span>Expert</span>
+                        <span>{single_course.level}</span>
                      </li>
                      <li>
                         <InjectableSvg src={icon_2.src} alt="img" className="injectable" />
                         Duration
-                        <span>3 Month</span>
+                        <span>{single_course.duration}</span>
                      </li>
                      <li>
                         <InjectableSvg src={icon_3.src} alt="img" className="injectable" />
                         Class
-                        <span>72+ Hour</span>
+                        <span>{single_course.classHours}</span>
                      </li>
                      <li>
                         <InjectableSvg src={icon_4.src} alt="img" className="injectable" />
                         Mode
-                        <span>Offline</span>
+                        <span>{single_course.mode}</span>
                      </li>
                      <li>
                         <InjectableSvg src={icon_5.src} alt="img" className="injectable" />
                         Certifications
-                        <span>Yes</span>
+                        <span>{single_course.certifications}</span>
                      </li>
                      <li>
                         <InjectableSvg src={icon_6.src} alt="img" className="injectable" />
                         Case Study
-                        <span>25+</span>
+                        <span>{single_course.caseStudies}</span>
                      </li>
                   </ul>
                </div>
@@ -91,4 +98,4 @@ const AdvanceDMSidebar = () => {
    )
 }
 
-export default AdvanceDMSidebar
+export default AdvanceGDSidebar

@@ -9,7 +9,7 @@ import HeaderOne from "@/layouts/headers/HeaderOne";
 import Wrapper from "@/layouts/Wrapper";
 
 export const metadata: Metadata = {
-   title: "Course Details SkillGro - Online Courses & Education React Next js Template",
+   title: "AdShalaa | Best Digital Marketing Courses in Mumbai",
 };
 
 type Props = {

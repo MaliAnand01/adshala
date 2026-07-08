@@ -1,9 +1,14 @@
 import React from "react";
 import Image from "next/image";
+import { CourseDataType } from "@/data/inner-data/InnerCourseData";
 
-import img3 from "@/assets/img/certificates/advance-digital-marketing/AshalaaDigital3.png";
+function AdvanceDMStatistics({ single_course }: { single_course?: CourseDataType }) {
+  const statsImage = single_course?.statisticsImage;
 
-function AdvanceDMStatistics() {
+  if (!statsImage) {
+    return null; // Or return a placeholder if desired
+  }
+
   return (
     <section className="py-5">
       <div className="container">
@@ -14,8 +19,8 @@ function AdvanceDMStatistics() {
         <div className="row justify-content-center">
           <div className="col-12 col-lg-8">
             <Image
-              src={img3}
-              alt="Digital Marketing Statistics"
+              src={statsImage}
+              alt="Salary Statistics"
               className="img-fluid rounded shadow"
               style={{
                 width: "100%",

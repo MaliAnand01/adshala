@@ -19,6 +19,7 @@ import thumb3 from "@/assets/img/courses/course_card_images/3.jpg"
 import thumb4 from "@/assets/img/courses/course_card_images/4.jpg"
 import thumb5 from "@/assets/img/courses/course_card_images/5.jpg"
 import thumb6 from "@/assets/img/courses/course_card_images/6.jpg"
+
 // Course Banner Images
 import course_banner1 from "@/assets/img/courses/coursesBanner/adshalaa_01.jpg"
 import course_banner2 from "@/assets/img/courses/coursesBanner/adshalaa_02.jpg"
@@ -26,30 +27,76 @@ import course_banner3 from "@/assets/img/courses/coursesBanner/adshalaa_03.jpg"
 import course_banner4 from "@/assets/img/courses/coursesBanner/adshalaa_04.jpg"
 import course_banner5 from "@/assets/img/courses/coursesBanner/adshalaa_05.jpg"
 import course_banner6 from "@/assets/img/courses/coursesBanner/adshalaa_06.jpg"
-interface DataType {
-   id: number;
-   sku?: String;
-   banner?: StaticImageData;
-   thumb: StaticImageData;
-   category: string;
-   rating: number;
-   title: string;
-   desc: string;
-   instructors: string;
-   price: number;
-   skill_level: string;
-   overview?: string;
-   price_type: string;
-   language: string;
-   meta1?: string;
-   meta2?: string;
-   meta3?: string;
-   popular?: string;
-}[];
 
+// Sidebar Banner Images (one per course)
+import sidebar_img_dm  from "@/assets/img/courses/sidebar_image/ADSHALA BANNER 01.jpg"
+import sidebar_img_gd  from "@/assets/img/courses/sidebar_image/ADSHALA BANNER 02.jpg"
+import sidebar_img_smm from "@/assets/img/courses/sidebar_image/ADSHALA BANNER 03.jpg"
+import sidebar_img_mc  from "@/assets/img/courses/sidebar_image/ADSHALA BANNER 04.jpg"
+import sidebar_img_seo from "@/assets/img/courses/sidebar_image/ADSHALA BANNER 05.jpg"
+import sidebar_img_web from "@/assets/img/courses/sidebar_image/ADSHALA BANNER 06.jpg"
 
+// Certificate Images (only DM has real ones for now)
+import cert_dm1 from "@/assets/img/certificates/advance-digital-marketing/AshalaaDigital1.png"
+import cert_dm2 from "@/assets/img/certificates/advance-digital-marketing/AshalaaDigital2.png"
+import cert_dm_stats from "@/assets/img/certificates/advance-digital-marketing/AshalaaDigital3.png"
 
-const inner_course_data: DataType[] = [
+// ─── Type Definitions ─────────────────────────────────────────────────────────
+
+export interface CourseOverview {
+  description: string;
+  learningsIntro: string;
+  learnings: string[];
+  closing: string;
+}
+
+export interface CourseCertificate {
+  title: string;
+  image: StaticImageData;
+}
+
+export interface CourseDataType {
+  id: number;
+  sku?: string;
+  banner?: StaticImageData;
+  thumb: StaticImageData;
+  category: string;
+  rating: number;
+  title: string;
+  desc: string;
+  instructors: string;
+  price: number;
+  originalPrice?: number;      // struck-through price shown in sidebar
+  skill_level: string;
+  overview?: string;           // key used to switch tabs in CourseDetailsArea
+  price_type: string;
+  language: string;
+  meta1?: string;
+  meta2?: string;
+  meta3?: string;
+  popular?: string;
+  // ── Enquiry / hero page fields ───────────────────────────────────────────────
+  duration?: string;           // e.g. "3 Months"
+  mode?: string;               // e.g. "Offline (Mumbai)"
+  phone?: string;              // e.g. "+91 86521 99991"
+  // ── Sidebar UI fields ────────────────────────────────────────────────────────
+  sidebarImage?: StaticImageData;
+  level?: string;              // e.g. "Expert"
+  classHours?: string;         // e.g. "72+ Hours"
+  certifications?: string;     // e.g. "Yes"
+  caseStudies?: string;        // e.g. "25+"
+  // ── Overview tab content ─────────────────────────────────────────────────────
+  courseOverview?: CourseOverview;
+  // ── Certificates tab ─────────────────────────────────────────────────────────
+  certificateImages?: CourseCertificate[];
+  // ── Salary Statistics tab ────────────────────────────────────────────────────
+  statisticsImage?: StaticImageData;
+}
+
+// ─── Active Course Data (single source of truth) ──────────────────────────────
+
+const inner_course_data: CourseDataType[] = [
+   // ── 1. Web Development ────────────────────────────────────────────────────
    {
       id: 116,
       sku: "certification-in-web-development-in-mumbai",
@@ -57,9 +104,10 @@ const inner_course_data: DataType[] = [
       thumb: thumb5,
       category: "Development",
       rating: 5,
-      title: "Certification in Web Development ",
+      title: "Certification in Web Development",
       instructors: "David Millar",
       price: 75000,
+      originalPrice: 130000,
       skill_level: "Beginner",
       overview: "certification-in-web-development",
       price_type: "Free",
@@ -67,8 +115,33 @@ const inner_course_data: DataType[] = [
       meta1: "WordPress & Shopify",
       meta2: "Build & Launch Websites",
       meta3: "Mentor Support",
-      desc: "when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.",
+      desc: "Build modern, responsive websites using HTML, CSS, JavaScript, WordPress and Shopify. Graduate with live project experience, an industry certification and full placement support.",
+      duration: "3 Months",
+      mode: "Offline (Mumbai)",
+      phone: "+91 86521 99991",
+      sidebarImage: sidebar_img_web,
+      level: "Expert",
+      classHours: "72+ Hours",
+      certifications: "Yes",
+      caseStudies: "25+",
+      courseOverview: {
+         description: "The Web Development Certification is a comprehensive, hands-on program designed to take you from complete beginner to building fully functional, professional websites and online stores — no coding required. Focused entirely on WordPress and Shopify, you'll learn to design, customize, launch and manage websites and e-commerce stores through live projects and real client-style builds. The course is backed by a 1-month paid internship and 100% placement support to help you transition smoothly into a web development career.",
+         learningsIntro: "This program covers WordPress and Shopify end-to-end combining website design, e-commerce setup, SEO, marketing tools and store management so you can build and run any professional website or online store independently.",
+         learnings: [
+            "Build and customize professional websites on WordPress from scratch",
+            "Design pages using Elementor and popular WordPress themes",
+            "Set up and manage complete e-commerce stores on WooCommerce and Shopify",
+            "Configure payments, shipping and checkout for online stores",
+            "Optimize websites for speed, SEO and performance",
+            "Use AI tools to speed up website building, content creation and design",
+         ],
+         closing: "By the end of the course, you'll be able to independently design, launch and manage WordPress websites and Shopify stores, handle real client projects and use AI tools to work more efficiently — skills directly applicable to WordPress Developer, Shopify Developer and freelance web development roles.",
+      },
+      certificateImages: [],
+      statisticsImage: undefined,
    },
+
+   // ── 2. Advanced SEO ───────────────────────────────────────────────────────
    {
       id: 115,
       sku: "advanced-seo-certification-in-mumbai",
@@ -76,18 +149,44 @@ const inner_course_data: DataType[] = [
       thumb: thumb4,
       category: "Marketing",
       rating: 5,
-      title: "Advanced SEO certification",
+      title: "Advanced SEO Certification",
       instructors: "David Millar",
       price: 20000,
+      originalPrice: 35000,
       skill_level: "Beginner",
       overview: "seo-certification",
       price_type: "Free",
       language: "Arabic",
-      // meta1: "5+ Platforms & AI Tools",
-      // meta2: "Live Seller Account Training",
-      // meta3: "Mentor Support",
-      desc: "when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.",
+      meta1: "Technical SEO & AI Tools",
+      meta2: "Keyword Research & Link Building",
+      meta3: "Mentor Support",
+      desc: "Master technical SEO, on-page and off-page optimisation, keyword research, link building and AI-powered SEO tools. Learn to rank websites and drive consistent organic traffic professionally.",
+      duration: "2 Months",
+      mode: "Offline (Mumbai)",
+      phone: "+91 86521 99991",
+      sidebarImage: sidebar_img_seo,
+      level: "Expert",
+      classHours: "72+ Hours",
+      certifications: "Yes",
+      caseStudies: "25+",
+      courseOverview: {
+         description: "The SEO Certification is a comprehensive, hands-on program designed to take you from SEO basics to advanced search engine strategy across both on-page and off-page disciplines. From keyword research and technical SEO to link building, local SEO and AI-powered tools, you'll gain practical experience through live website audits, real ranking projects and hands-on tool training. The course is backed by a 1-month paid internship and 100% placement support to help you transition smoothly into an SEO or digital marketing career.",
+         learningsIntro: "This program covers the complete SEO toolkit, combining search strategy, technical knowledge, content optimization and analytics so you can improve rankings, drive organic traffic and deliver measurable results for any website or business.",
+         learnings: [
+            "Perform in-depth keyword research and competitor analysis",
+            "Optimize web pages for search engines using on-page SEO techniques",
+            "Fix technical SEO issues including site speed, crawlability and structured data",
+            "Build high-quality backlinks through proven off-page SEO strategies",
+            "Set up and manage Google Search Console, Google Analytics & SEO tools",
+            "Use AI tools to scale content creation, audits and SEO reporting",
+         ],
+         closing: "By the end of the course, you'll be able to independently plan and execute SEO strategies, conduct full website audits, track and report organic performance and apply AI tools to boost efficiency — skills directly applicable to SEO executive, content strategist and digital marketing roles.",
+      },
+      certificateImages: [],
+      statisticsImage: undefined,
    },
+
+   // ── 3. Marketplace Specialist ─────────────────────────────────────────────
    {
       id: 114,
       sku: "marketplace-specialist-program-in-mumbai",
@@ -98,6 +197,7 @@ const inner_course_data: DataType[] = [
       title: "Marketplace Specialist Program",
       instructors: "David Millar",
       price: 20000,
+      originalPrice: 35000,
       skill_level: "Beginner",
       overview: "marketplace-certification",
       price_type: "Free",
@@ -105,8 +205,33 @@ const inner_course_data: DataType[] = [
       meta1: "5+ Platforms & AI Tools",
       meta2: "Live Seller Account Training",
       meta3: "Mentor Support",
-      desc: "when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.",
+      desc: "Become a certified marketplace specialist. Learn to sell on Amazon, Flipkart and Meesho — from product listings and catalogue management to sponsored ads and scaling strategies.",
+      duration: "2 Months",
+      mode: "Offline (Mumbai)",
+      phone: "+91 86521 99991",
+      sidebarImage: sidebar_img_mc,
+      level: "Expert",
+      classHours: "72+ Hours",
+      certifications: "Yes",
+      caseStudies: "25+",
+      courseOverview: {
+         description: "The Marketplace Certification is a comprehensive, hands-on program designed to take you from marketplace basics to advanced seller strategy across India's top e-commerce platforms. From product listing and catalog management to sponsored ads, inventory and performance analytics, you'll gain practical experience through live seller accounts and real product campaigns. The course is backed by a 1-month paid internship and 100% placement support to help you transition smoothly into an e-commerce or marketplace management career.",
+         learningsIntro: "This program covers the complete marketplace management toolkit combining platform knowledge, product strategy, advertising and analytics so you can set up, manage and scale any seller account profitably across multiple platforms.",
+         learnings: [
+            "Set up and manage seller accounts on Amazon, Flipkart, Meesho, Myntra and more",
+            "Create optimized product listings with the right keywords, images, and descriptions",
+            "Run and manage sponsored ad campaigns to drive visibility and sales",
+            "Handle inventory, orders, returns, and customer service efficiently",
+            "Track performance with platform analytics and data-driven decision making",
+            "Use AI tools to automate listings, pricing, and marketplace operations",
+         ],
+         closing: "By the end of the course, you'll be able to independently manage and scale e-commerce seller accounts, run profitable ad campaigns and apply AI tools to maximize efficiency — skills directly applicable to marketplace management, e-commerce executive and catalog management roles.",
+      },
+      certificateImages: [],
+      statisticsImage: undefined,
    },
+
+   // ── 4. Social Media Management ────────────────────────────────────────────
    {
       id: 113,
       sku: "mastery-in-social-media-management-in-mumbai",
@@ -117,6 +242,7 @@ const inner_course_data: DataType[] = [
       title: "Mastery in Social Media Management",
       instructors: "David Millar",
       price: 20000,
+      originalPrice: 35000,
       skill_level: "Beginner",
       overview: "mastery-in-social-media-management",
       price_type: "Free",
@@ -124,8 +250,33 @@ const inner_course_data: DataType[] = [
       meta1: "10+ Platforms & AI Tools",
       meta2: "Content Strategy",
       meta3: "Mentor Support",
-      desc: "when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.",
+      desc: "Learn to plan, create and grow brand presence across Instagram, Facebook, LinkedIn and YouTube. Master content calendars, analytics, paid ads and influencer strategy with expert mentors.",
+      duration: "2 Months",
+      mode: "Offline (Mumbai)",
+      phone: "+91 86521 99991",
+      sidebarImage: sidebar_img_smm,
+      level: "Expert",
+      classHours: "72+ Hours",
+      certifications: "Yes",
+      caseStudies: "25+",
+      courseOverview: {
+         description: "The Mastery in Social Media Management is a comprehensive, hands-on program designed to take you from social media basics to advanced strategy across every major platform. From content creation and community management to paid campaigns, analytics and AI-powered tools, you'll gain practical experience through live brand projects and real campaign work. The course is backed by a 1-month paid internship and 100% placement support to help you transition smoothly into a social media career.",
+         learningsIntro: "This program covers the complete social media toolkit combining platform strategy, content creation, paid advertising and performance analytics so you can manage, grow and monetize any brand's social presence.",
+         learnings: [
+            "Master content strategy and planning across Instagram, Facebook, LinkedIn and YouTube",
+            "Create engaging posts, reels, stories and ad creatives using Canva and AI tools",
+            "Run and optimize paid social media campaigns across platforms",
+            "Build and manage brand communities with strong engagement strategies",
+            "Track, analyze and report social media performance using analytics tools",
+            "Work with influencers, manage brand reputation and execute viral campaigns",
+         ],
+         closing: "By the end of the course, you'll be able to independently manage social media for brands and businesses, run paid campaigns, create compelling content and use AI tools to maximize efficiency — skills directly applicable to agency, in-house and freelance social media roles.",
+      },
+      certificateImages: [],
+      statisticsImage: undefined,
    },
+
+   // ── 5. Graphic Design & AI ────────────────────────────────────────────────
    {
       id: 112,
       sku: "certification-in-advanced-graphic-design-and-ai-mumbai",
@@ -136,6 +287,7 @@ const inner_course_data: DataType[] = [
       title: "Certification in Advanced Graphic Design & AI",
       instructors: "David Millar",
       price: 90000,
+      originalPrice: 100000,
       skill_level: "Beginner",
       overview: "certification-in-advanced-graphic-design-&-ai",
       price_type: "Free",
@@ -143,8 +295,32 @@ const inner_course_data: DataType[] = [
       meta1: "15+ Design Software & AI Tools",
       meta2: "Portfolio Building",
       meta3: "Mentor Support",
-      desc: "when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.",
+      desc: "Learn professional graphic design using Adobe Photoshop, Illustrator, InDesign and AI-powered design workflows. Build a job-ready portfolio, earn a recognised certification and launch your creative career.",
+      duration: "3 Months",
+      mode: "Offline (Mumbai)",
+      phone: "+91 86521 99991",
+      sidebarImage: sidebar_img_gd,
+      level: "Expert",
+      classHours: "72+ Hours",
+      certifications: "Yes",
+      caseStudies: "25+",
+      courseOverview: {
+         description: "The Graphic Design Certification is a comprehensive, hands-on program designed to take you from design fundamentals to advanced, industry-ready creative skills. From Adobe Photoshop and Illustrator to Canva, UI/UX basics, branding and AI design tools, you'll gain practical experience through live client-style projects and a professional portfolio. The course is backed by a 1-month paid internship and 100% placement support to help you transition smoothly into a graphic design career.",
+         learningsIntro: "This program covers the complete graphic design toolkit — combining design theory, software skills, and real-world application so you can create professional, client-ready work across print, digital, and social media. Master design fundamentals: color theory, typography, layout & composition.",
+         learnings: [
+            "Design in Adobe Photoshop, Illustrator and Canva",
+            "Create logos, brand identities, and complete brand style guides",
+            "Build UI/UX basics for web and mobile using Figma",
+            "Design social media creatives, ads, and motion graphics",
+            "Use AI tools for image generation, editing, and design automation",
+         ],
+         closing: "By the end of the course, you'll be able to design professional branding, marketing and digital assets, build a strong portfolio, and apply AI-driven tools to boost creativity and efficiency — skills directly applicable to real agency, in-house and freelance design roles.",
+      },
+      certificateImages: [],
+      statisticsImage: undefined,
    },
+
+   // ── 6. Digital Marketing & AI ─────────────────────────────────────────────
    {
       id: 111,
       sku: "certification-in-advanced-digital-marketing-and-ai-mumbai",
@@ -155,6 +331,7 @@ const inner_course_data: DataType[] = [
       title: "Certification in Advanced Digital Marketing & AI",
       instructors: "David Millar",
       price: 60000,
+      originalPrice: 100000,
       skill_level: "Beginner",
       overview: "certification-in-advanced-digital-marketing-&-ai",
       price_type: "Free",
@@ -162,7 +339,33 @@ const inner_course_data: DataType[] = [
       meta1: "20+ AI Tools",
       meta2: "Resume Building",
       meta3: "Mentor Support",
-      desc: "when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.",
+      desc: "Master SEO, PPC, social media, email marketing, content strategy and AI-powered marketing tools. Graduate with an industry-recognised certification, real-world project experience and 100% placement assistance.",
+      duration: "3 Months",
+      mode: "Offline (Mumbai)",
+      phone: "+91 86521 99991",
+      sidebarImage: sidebar_img_dm,
+      level: "Expert",
+      classHours: "72+ Hours",
+      certifications: "Yes",
+      caseStudies: "25+",
+      courseOverview: {
+         description: "The Digital Marketing Certification is a comprehensive, hands-on program designed to take you from fundamentals to advanced strategy across the entire digital marketing landscape. From Google Ads and SEO to AI automation, social media, email and marketplace marketing, you'll gain practical, job-ready skills through live projects and real campaigns. The course is backed by a 1-month paid internship and 100% placement support to help you transition smoothly into a digital marketing career.",
+         learningsIntro: "This program covers the complete digital marketing toolkit combining strategy, execution and analytics so you can plan, run and measure campaigns confidently across every major platform.",
+         learnings: [
+            "Run and optimize Google Ads campaigns (Search, Display, Shopping, YouTube)",
+            "Build and execute social media marketing & SEO strategies",
+            "Use 20+ AI tools to automate content, design, and reporting",
+            "Create marketing creatives in Canva and design high-converting landing pages",
+            "Track performance with Google Analytics and SEO audits",
+            "Execute email, WhatsApp, influencer and affiliate marketing campaigns",
+         ],
+         closing: "By the end of the course, you'll be able to plan and manage end-to-end digital marketing campaigns, analyze performance data, and apply AI-driven tools to boost efficiency — skills directly applicable to real agency and brand marketing roles.",
+      },
+      certificateImages: [
+         { title: "Certificate of Completion", image: cert_dm1 },
+         { title: "Internship Certificate",    image: cert_dm2 },
+      ],
+      statisticsImage: cert_dm_stats,
    },
 ]
 

@@ -1,5 +1,5 @@
 
-const Overview = () => {
+const Overview = ({ single_course }: any) => {
    return (
       <div className="courses__overview-wrap">
          <h3 className="title">Course Description</h3>

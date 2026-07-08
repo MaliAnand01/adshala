@@ -15,7 +15,7 @@ import icon_4 from "@/assets/img/icons/course_icon04.svg";
 import icon_5 from "@/assets/img/icons/course_icon05.svg";
 import icon_6 from "@/assets/img/icons/course_icon06.svg";
 
-const Sidebar = () => {
+const Sidebar = ({ single_course }: any) => {
 
    const [isVideoOpen, setIsVideoOpen] = useState(false);
 
