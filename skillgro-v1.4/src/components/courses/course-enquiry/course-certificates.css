@@ -1,0 +1,161 @@
+/* ────────────────────────────────────────────────────────────────────────────
+   course-certificates.css
+   Course + Internship certificate image cards
+   Desktop: side by side | Mobile: stacked single column
+   ──────────────────────────────────────────────────────────────────────────── */
+
+.cc__section {
+  background: #ffffff;
+  padding: 80px 0 64px;
+}
+
+.cc__wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Header ── */
+.cc__header {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.cc__eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #ffc224;
+  background: rgba(255, 194, 36, 0.12);
+  border-radius: 50px;
+  padding: 5px 16px;
+  margin-bottom: 14px;
+}
+
+.cc__heading {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #111827;
+  margin-bottom: 14px;
+}
+
+.cc__course-name {
+  color: #1a3f32;
+}
+
+.cc__subtext {
+  font-size: 15px;
+  color: #6b7280;
+  line-height: 1.65;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ── Certificate card grid ── */
+/* Uses CSS custom property --count for dynamic column count */
+.cc__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--count, 2), 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.cc__card {
+  background: #ffffff;
+  border: 2px solid #e5ebe8;
+  border-radius: 20px;
+  padding: 24px;
+  cursor: pointer;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cc__card:hover,
+.cc__card--active {
+  border-color: #1a3f32;
+  box-shadow: 0 12px 40px rgba(26, 63, 50, 0.12);
+  transform: translateY(-4px);
+}
+
+/* ── Title badge ── */
+.cc__card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #1a3f32, #2d6a4f);
+  color: #ffc224;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 18px;
+  border-radius: 50px;
+  width: fit-content;
+}
+
+.cc__card-badge i {
+  font-size: 14px;
+}
+
+/* ── Image frame ── */
+.cc__img-frame {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  line-height: 0;
+  /* remove gap under image */
+}
+
+/* ── Footer note ── */
+.cc__footer-note {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cc__footer-note i {
+  color: #1a3f32;
+  font-size: 15px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .cc__section {
+    padding: 56px 0 48px;
+  }
+
+  .cc__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .cc__heading {
+    font-size: 24px;
+  }
+
+  .cc__card {
+    padding: 18px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cc__heading {
+    font-size: 20px;
+  }
+
+  .cc__footer-note {
+    flex-direction: column;
+    gap: 6px;
+  }
+}

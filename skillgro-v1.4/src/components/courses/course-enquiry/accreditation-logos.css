@@ -1,0 +1,105 @@
+/* ────────────────────────────────────────────────────────────────────────────
+   accreditation-logos.css
+   6 partner logo cards — 1 row desktop, 2×3 mobile
+   ──────────────────────────────────────────────────────────────────────────── */
+
+.accred__section {
+  background: #f8faf9;
+  padding: 64px 0;
+  border-top: 1px solid #eef1ef;
+  border-bottom: 1px solid #eef1ef;
+}
+
+.accred__wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.accred__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.accred__eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #1a3f32;
+  background: rgba(26, 63, 50, 0.08);
+  border-radius: 50px;
+  padding: 5px 16px;
+  margin-bottom: 12px;
+}
+
+.accred__heading {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a3f32;
+  margin: 0;
+}
+
+/* ── Logo grid ── */
+.accred__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.accred__card {
+  background: #ffffff;
+  border: 1px solid #e5ebe8;
+  border-radius: 16px;
+  padding: 24px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+  cursor: default;
+}
+
+.accred__card:hover {
+  box-shadow: 0 8px 24px rgba(26, 63, 50, 0.1);
+  transform: translateY(-3px);
+  border-color: #1a3f32;
+}
+
+.accred__logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 991px) {
+  /* 2 rows × 3 cols */
+  .accred__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .accred__heading {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .accred__section {
+    padding: 48px 0;
+  }
+
+  .accred__card {
+    padding: 16px 10px;
+    min-height: 80px;
+    border-radius: 12px;
+  }
+
+  .accred__heading {
+    font-size: 16px;
+  }
+}
