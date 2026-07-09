@@ -1,5 +1,6 @@
 'use client'
-import BrandOne from "@/components/common/brands/BrandOne"
+import ToolsSlider from "@/components/common/ToolsSlider/ToolsSlider"
+import { HOME_PAGE_TOOLS } from "@/data/inner-data/CourseToolsData"
 import Banner from "./Banner"
 import About from "./About"
 import CourseArea from "./CourseArea"
@@ -29,7 +30,7 @@ const HomeOne = () => {
          <main className="main-area fix">
             <Banner />
             <Categories />
-            <BrandOne />
+            <ToolsSlider tools={HOME_PAGE_TOOLS} title="Tools & Technologies We Teach" />
             <About />
             <CourseArea />
             <Newsletter />
@@ -47,3 +48,4 @@ const HomeOne = () => {
 }
 
 export default HomeOne
+
