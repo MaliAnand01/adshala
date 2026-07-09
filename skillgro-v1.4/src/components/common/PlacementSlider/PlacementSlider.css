@@ -1,0 +1,217 @@
+/* ────────────────────────────────────────────────────────────────────────────
+   PlacementSlider.css
+   Infinite-scroll placement-champions ticker (single row, portrait cards).
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* ── Section wrapper ────────────────────────────────────────────────────── */
+.ps__section {
+  width: 100%;
+  padding: 60px 0 50px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f8faf9 0%, #ffffff 100%);
+}
+
+/* ── Header block ───────────────────────────────────────────────────────── */
+.ps__header {
+  max-width: 720px;
+  margin: 0 auto 36px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.ps__title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1a3f32;
+  margin: 0 0 12px;
+  line-height: 1.25;
+}
+
+.ps__title span {
+  color: #e8a520;
+}
+
+.ps__desc {
+  font-size: 16px;
+  color: #5a7a6b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Rounded container around the slider ────────────────────────────────── */
+.ps__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 0;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e8ede9;
+  box-shadow: 0 4px 24px rgba(26, 63, 50, 0.06);
+  overflow: hidden;
+}
+
+/* ── Track container (holds the moving strip) ───────────────────────────── */
+.ps__track-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Fade edges so the scroll looks seamless */
+.ps__track-wrapper::before,
+.ps__track-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+.ps__track-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, #ffffff, transparent);
+}
+.ps__track-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, #ffffff, transparent);
+}
+
+/* ── Moving track ───────────────────────────────────────────────────────── */
+.ps__track {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: ps-scroll 40s linear infinite;
+}
+
+.ps__track:hover {
+  animation-play-state: paused;
+}
+
+/* ── Individual card ────────────────────────────────────────────────────── */
+.ps__card {
+  flex-shrink: 0;
+  width: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(26, 63, 50, 0.08);
+  background: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.ps__card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(26, 63, 50, 0.15);
+}
+
+.ps__card-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 3 / 4;
+}
+
+/* ── Keyframes ──────────────────────────────────────────────────────────── */
+@keyframes ps-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .ps__section {
+    padding: 48px 0 40px;
+  }
+
+  .ps__container {
+    margin: 0 20px;
+    border-radius: 16px;
+    padding: 22px 0;
+  }
+
+  .ps__title {
+    font-size: 26px;
+  }
+
+  .ps__desc {
+    font-size: 15px;
+  }
+
+  .ps__card {
+    width: 190px;
+  }
+
+  .ps__track {
+    gap: 20px;
+  }
+
+  .ps__track-wrapper::before,
+  .ps__track-wrapper::after {
+    width: 60px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .ps__section {
+    padding: 36px 0 30px;
+  }
+
+  .ps__container {
+    margin: 0 16px;
+    border-radius: 14px;
+    padding: 18px 0;
+  }
+
+  .ps__header {
+    margin-bottom: 24px;
+  }
+
+  .ps__title {
+    font-size: 22px;
+  }
+
+  .ps__desc {
+    font-size: 14px;
+  }
+
+  .ps__card {
+    width: 160px;
+    border-radius: 12px;
+  }
+
+  .ps__track {
+    gap: 16px;
+    animation-duration: 30s;
+  }
+
+  .ps__track-wrapper::before,
+  .ps__track-wrapper::after {
+    width: 40px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 400px) {
+  .ps__card {
+    width: 140px;
+    border-radius: 10px;
+  }
+
+  .ps__track {
+    gap: 12px;
+  }
+
+  .ps__title {
+    font-size: 20px;
+  }
+}
