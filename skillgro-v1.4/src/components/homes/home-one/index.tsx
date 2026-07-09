@@ -1,5 +1,6 @@
 'use client'
 import ToolsSlider from "@/components/common/ToolsSlider/ToolsSlider"
+import PlacementSlider from "@/components/common/PlacementSlider/PlacementSlider"
 import { HOME_PAGE_TOOLS } from "@/data/inner-data/CourseToolsData"
 import Banner from "./Banner"
 import About from "./About"
@@ -29,6 +30,7 @@ const HomeOne = () => {
          <HeaderOne />
          <main className="main-area fix">
             <Banner />
+            <PlacementSlider />
             <Categories />
             <ToolsSlider tools={HOME_PAGE_TOOLS} title="Tools & Technologies We Teach" />
             <About />
