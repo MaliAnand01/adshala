@@ -162,6 +162,38 @@ export const COURSE_TOOLS: Record<string, CourseTool> = {
   },
 };
 
+// ── Home Page Tools (comprehensive showcase of all technologies) ───────────
+export const HOME_PAGE_TOOLS: CourseTool = {
+  row1: [
+    { name: "Google Ads",      icon: "fab fa-google" },
+    { name: "Facebook Ads",    icon: "fab fa-facebook-square" },
+    { name: "Instagram",       icon: "fab fa-instagram" },
+    { name: "YouTube",         icon: "fab fa-youtube" },
+    { name: "WordPress",       icon: "fab fa-wordpress" },
+    { name: "Shopify",         icon: "fab fa-shopify" },
+    { name: "ChatGPT AI",      icon: "fas fa-robot" },
+    { name: "Photoshop",       icon: "fas fa-image" },
+    { name: "Figma",           icon: "fab fa-figma" },
+    { name: "HTML5",           icon: "fab fa-html5" },
+    { name: "Amazon Seller",   icon: "fab fa-amazon" },
+    { name: "SEMrush",         icon: "fas fa-chart-bar" },
+  ],
+  row2: [
+    { name: "Google Analytics", icon: "fas fa-chart-line" },
+    { name: "LinkedIn",         icon: "fab fa-linkedin" },
+    { name: "Canva",            icon: "fas fa-palette" },
+    { name: "Illustrator",     icon: "fas fa-pen-nib" },
+    { name: "CSS3",            icon: "fab fa-css3-alt" },
+    { name: "JavaScript",      icon: "fab fa-js" },
+    { name: "Ahrefs",          icon: "fas fa-search-plus" },
+    { name: "Midjourney",      icon: "fas fa-magic" },
+    { name: "WhatsApp",        icon: "fab fa-whatsapp" },
+    { name: "Mailchimp",       icon: "fab fa-mailchimp" },
+    { name: "GitHub",          icon: "fab fa-github" },
+    { name: "HubSpot",         icon: "fas fa-bullseye" },
+  ],
+};
+
 // Fallback for courses without specific tools data
 export const DEFAULT_TOOLS: CourseTool = {
   row1: [
