@@ -1,0 +1,204 @@
+/* ────────────────────────────────────────────────────────────────────────────
+   why-choose-us.css
+   "Why Choose Adshalaa?" section — facts on left, stat counters on right.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+.wcu__section {
+  background: #ffffff;
+  padding: 80px 0 64px;
+}
+
+.wcu__wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 64px;
+  align-items: center;
+}
+
+/* ── Left panel ──────────────────────────────────────────────────────────── */
+.wcu__left {
+  display: flex;
+  flex-direction: column;
+}
+
+.wcu__eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #ffc224;
+  background: rgba(255, 194, 36, 0.12);
+  border-radius: 50px;
+  padding: 5px 14px;
+  margin-bottom: 16px;
+  width: fit-content;
+}
+
+.wcu__heading {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #111827;
+  margin-bottom: 14px;
+}
+
+.wcu__brand {
+  color: #1a3f32;
+}
+
+.wcu__subtext {
+  font-size: 15px;
+  color: #6b7280;
+  line-height: 1.65;
+  margin-bottom: 32px;
+  max-width: 480px;
+}
+
+/* ── Fact list ───────────────────────────────────────────────────────────── */
+.wcu__facts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.wcu__fact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.wcu__fact-icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1a3f32, #2d6a4f);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffc224;
+  font-size: 15px;
+  margin-top: 1px;
+}
+
+.wcu__fact-text {
+  font-size: 14.5px;
+  color: #374151;
+  line-height: 1.65;
+  font-weight: 500;
+}
+
+.wcu__fact-source {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* ── Right panel — stat counters grid ───────────────────────────────────── */
+.wcu__right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wcu__stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+.wcu__stat-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: default;
+}
+
+.wcu__stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(26, 63, 50, 0.12);
+}
+
+.wcu__stat-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #1a3f32, #2d6a4f);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px auto;
+  color: #ffc224;
+  font-size: 20px;
+}
+
+.wcu__stat-number {
+  font-size: 36px;
+  font-weight: 600;
+  color: #1a3f32;
+  line-height: 1;
+  margin-bottom: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.wcu__stat-label {
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Divider between tools bar and this section ──────────────────────────── */
+.wcu__section+.wcu__section,
+.ts__section+.wcu__section {
+  border-top: 1px solid #f3f4f6;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .wcu__wrapper {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .wcu__heading {
+    font-size: 28px;
+  }
+
+  .wcu__stats-grid {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .wcu__section {
+    padding: 56px 0 48px;
+  }
+
+  .wcu__heading {
+    font-size: 24px;
+  }
+
+  .wcu__stat-number {
+    font-size: 28px;
+  }
+
+  .wcu__stat-card {
+    padding: 22px 14px;
+  }
+}

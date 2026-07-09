@@ -1,0 +1,132 @@
+/* ────────────────────────────────────────────────────────────────────────────
+   ToolsSlider.css
+   Reusable infinite-scroll tools / logo ticker.
+   Always 2 rows on all screen sizes.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+.ts__section {
+  max-width: 1280px;
+  margin: 60px auto 0 auto;
+  padding: 0 15px;
+  overflow: hidden;
+}
+
+.ts__title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a3f32;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ts__container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+}
+
+/* Fade edges so the scroll looks seamless */
+.ts__container::before,
+.ts__container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+.ts__container::before {
+  left: 0;
+  background: linear-gradient(to right, #ffffff, transparent);
+}
+.ts__container::after {
+  right: 0;
+  background: linear-gradient(to left, #ffffff, transparent);
+}
+
+/* ── Row wrapper ─────────────────────────────────────────────────────────── */
+.ts__row {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ── Tracks ──────────────────────────────────────────────────────────────── */
+.ts__track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  white-space: nowrap;
+}
+
+.ts__track--left {
+  animation: ts-scroll-left 28s linear infinite;
+}
+
+.ts__track--right {
+  animation: ts-scroll-right 28s linear infinite;
+}
+
+/* ── Individual item pill ────────────────────────────────────────────────── */
+.ts__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid #e8ede9;
+  padding: 11px 22px;
+  border-radius: 50px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+  color: #1a3f32;
+  font-weight: 600;
+  font-size: 14px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  cursor: default;
+  flex-shrink: 0;
+}
+
+.ts__item:hover {
+  box-shadow: 0 6px 18px rgba(26, 63, 50, 0.12);
+  transform: translateY(-2px);
+}
+
+.ts__item i {
+  font-size: 18px;
+  color: #1a3f32;
+}
+
+/* ── Keyframes ───────────────────────────────────────────────────────────── */
+@keyframes ts-scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes ts-scroll-right {
+  0%   { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .ts__section {
+    margin-top: 40px;
+  }
+
+  .ts__title {
+    font-size: 15px;
+  }
+
+  .ts__item {
+    font-size: 13px;
+    padding: 9px 16px;
+    gap: 8px;
+  }
+
+  .ts__item i {
+    font-size: 16px;
+  }
+}
